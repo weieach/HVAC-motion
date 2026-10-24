@@ -26,19 +26,19 @@
         </header>
 
         <section class="titles" id="titles" aria-live="polite"></section>
-        <div class="rule rule-top"></div>
+        <div class="rule"></div>
 
+        <div class="main-row" id="mainRow">
         <section class="panel viz-panel">
           <div class="panel-head">
             <span class="p-kicker">02 · 画面 <b>VISUAL</b></span>
             <span class="p-kicker" id="vizMeta">SHOT 01 / 11 · 0:00–0:08</span>
           </div>
           <div class="viz-box" id="vizBox">
-            <div class="viz" id="viz">
-              <div class="viz-grid"></div>
-              <!-- scenes are injected by scenes.js, before the brackets -->
-              <i class="bracket tl"></i><i class="bracket tr"></i><i class="bracket bl"></i><i class="bracket br"></i>
-            </div>
+            <div class="viz-grid"></div>
+            <!-- 1252×520 scene space; scenes are injected by scenes.js, scaled + centred by player.js -->
+            <div class="viz" id="viz"></div>
+            <i class="bracket tl"></i><i class="bracket tr"></i><i class="bracket bl"></i><i class="bracket br"></i>
           </div>
           <div class="captions" id="captions"></div>
         </section>
@@ -61,6 +61,7 @@
             </div>
           </div>
         </aside>
+        </div>
 
       </div>
     </div>

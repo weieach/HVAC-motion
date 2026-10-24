@@ -31,17 +31,16 @@
   const segs = [...$('track').children];
   const segFills = segs.map((g) => g.querySelector('b'));
 
-  /* ---------- layout: scale the whole 1920×1080 stage, or (stacked) only the 1252×520 scene ---------- */
+  /* ---------- layout: contain-fit the 1252×520 scene into the visual panel ---------- */
   const vizBox = $('vizBox');
   const STACK_MQ = matchMedia('(max-width: 767px) and (orientation: portrait)');
+  const mainRow = $('mainRow');
   const fit = () => {
-    if (STACK_MQ.matches) {
-      stage.style.transform = '';
-      viz.style.transform = `scale(${vizBox.clientWidth / 1252})`;
-    } else {
-      stage.style.transform = `scale(${frame.clientWidth / 1920})`;
-      viz.style.transform = '';
-    }
+    const bw = vizBox.clientWidth, bh = vizBox.clientHeight;
+    // row height budget: scene height at this width + 30% breathing room + panel head/borders (width-only → no loop)
+    mainRow.style.setProperty('--row-fit', `${Math.round(bw * 520 / 1252 * 1.3 + 42)}px`);
+    const s = Math.min(bw / 1252, bh / 520);
+    viz.style.transform = `translate(${((bw - 1252 * s) / 2).toFixed(1)}px, ${((bh - 520 * s) / 2).toFixed(1)}px) scale(${s.toFixed(5)})`;
   };
   const ro = new ResizeObserver(fit);
   ro.observe(frame);
@@ -166,7 +165,7 @@
 
   new ResizeObserver(() => render()).observe(scrub); // keep the playhead in place when the timeline resizes
 
-  // landscape fit: tell CSS how much height the non-frame chrome takes (padding + controls + hint)
+  // tell CSS how much height everything except the main row takes, so the row can fill the rest of the viewport
   const controls = document.querySelector('.controls'), hint = document.querySelector('.hint');
   const outerH = (el) => {
     if (!el.offsetParent) return 0;
@@ -175,10 +174,12 @@
   };
   const measureChrome = () => {
     const ps = getComputedStyle(player);
-    const h = parseFloat(ps.paddingTop) + parseFloat(ps.paddingBottom) + outerH(controls) + outerH(hint);
+    const h = parseFloat(ps.paddingTop) + parseFloat(ps.paddingBottom) + outerH(controls) + outerH(hint)
+      + frame.offsetHeight - mainRow.offsetHeight;
     document.documentElement.style.setProperty('--chrome-h', `${Math.ceil(h) + 1}px`);
   };
   const chromeRO = new ResizeObserver(measureChrome);
+  chromeRO.observe(frame);
   chromeRO.observe(controls);
   chromeRO.observe(hint);
   measureChrome();

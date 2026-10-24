@@ -10,8 +10,7 @@
   const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
   const R = (a, b) => a + (b - a) * rnd();
   const f = (n) => +n.toFixed(1);
-  const anchor = viz.querySelector('.bracket');
-  const add = (html) => anchor.insertAdjacentHTML('beforebegin', html);
+  const add = (html) => viz.insertAdjacentHTML('beforeend', html);
   const svgOpen = `<svg viewBox="0 0 ${VW} ${VH}" aria-hidden="true">`;
   const chars = (s, cls = 'ch') => [...s].map((c, i) => `<span class="${cls}" style="--i:${i}">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
 
