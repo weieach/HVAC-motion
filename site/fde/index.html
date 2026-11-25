@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FDE 的另一半故事</title>
+  <meta name="description" content="动画：FDE 火了，但一半的故事没人讲——从成衣与版型、甲方的裁缝、为什么是现在、剪裁与量体，到记回版房。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    try { const th = localStorage.getItem('fde-theme'); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
+  </script>
+</head>
+<body>
+  <main class="app" id="app">
+    <span class="section-label mono swap" id="kicker"></span>
+    <div class="frame" id="frame">
+      <div class="stage" id="stage">
+        <div class="scenes" id="scenes"></div>
+        <header class="head">
+          <h1 class="title swap" id="title"></h1>
+        </header>
+        <footer class="foot mono"><span>示意动画 · 内容引自《FDE 火了，但一半的故事没人讲》· 数值为示意</span><span>FDE × 甲方视角</span></footer>
+      </div>
+    </div>
+
+    <aside class="transcript" aria-label="字幕">
+      <div class="tr-head">
+        <span class="mono">CAPTION · 字幕</span>
+      </div>
+      <div class="tr-scroll" id="trScroll"><ol class="tr-list" id="trList" aria-live="polite"></ol></div>
+    </aside>
+
+    <nav class="bar" aria-label="播放控制">
+      <ol class="tabs" id="tabs"></ol>
+      <span class="time mono" id="page">01 / 07</span>
+      <button class="btn icon" id="theme" type="button" title="切换明暗主题" aria-label="切换明暗主题">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+      </button>
+      <button class="btn icon" id="fs" type="button" title="全屏（F）" aria-label="全屏">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      </button>
+      <span class="nav">
+        <button class="btn nav-btn" id="prev" type="button" title="上一页（←）">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M19.5 12h-15M10.5 6l-6 6 6 6"/></svg><span>上一页</span>
+        </button>
+        <button class="btn nav-btn" id="next" type="button" title="下一页（→）">
+          <span>下一页</span><svg class="ic" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
+        </button>
+      </span>
+    </nav>
+  </main>
+
+  <script src="kit.js"></script>
+  <script src="chapters.js"></script>
+  <script src="player.js"></script>
+</body>
+</html>
